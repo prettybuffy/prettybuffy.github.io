@@ -1,33 +1,36 @@
 ---
 layout: post
-title: A long announcement with details
-date: 2015-11-07 16:11:00-0400
+title: Started my Ph.D. at Brown!
+date: 2021-09-15 16:11:00-0400
 inline: false
 related_posts: false
 ---
 
-Announcements and news can be much longer than just quick inline posts. In fact, they can have all the features available for the standard blog posts. See below.
+Welcome to zainabiftikhar.com
 
 ---
 
-Jean shorts raw denim Vice normcore, art party High Life PBR skateboard stumptown vinyl kitsch. Four loko meh 8-bit, tousled banh mi tilde forage Schlitz dreamcatcher twee 3 wolf moon. Chambray asymmetrical paleo salvia, sartorial umami four loko master cleanse drinking vinegar brunch. <a href="https://www.pinterest.com">Pinterest</a> DIY authentic Schlitz, hoodie Intelligentsia butcher trust fund brunch shabby chic Kickstarter forage flexitarian. Direct trade <a href="https://en.wikipedia.org/wiki/Cold-pressed_juice">cold-pressed</a> meggings stumptown plaid, pop-up taxidermy. Hoodie XOXO fingerstache scenester Echo Park. Plaid ugh Wes Anderson, freegan pug selvage fanny pack leggings pickled food truck DIY irony Banksy.
+Before I can begin updating you on 2023, let’s rewind back to 2018. I graduated from FAST-NUCES, Pakistan with a B Sc. in Computer Science. The four years of my life were full of interesting people, captivating lectures, and lifelong friends.
 
-#### Hipster list
+After graduating, I started working as a software engineer at Pantera Energy where I loved coding and meeting clients. During my job, I decided to take some time off and back-packed in Istanbul, Turkey with one of my loveliest friends, Majlinda. After six months, I came back to Pakistan where I joined HCI for Social Well-being Lab as as a Research Associate.
+
+> it is a serious thing
+> just to be alive
+> on this fresh morning
+> in the broken world.
+> —Mary Oliver
+
+And so, while I am just starting my third year, I have been in the research “business” for about five years. I have loved every project I have worked on, whether it was designing systems for the marginalized communities of Pakistan or using explainable AI to raise awareness in my country or developing and investigating communication tools at Brown.
+
+<!-- #### Hipster list
 
 <ul>
     <li>brunch</li>
     <li>fixie</li>
     <li>raybans</li>
     <li>messenger bag</li>
-</ul>
-
-Hoodie Thundercats retro, tote bag 8-bit Godard craft beer gastropub. Truffaut Tumblr taxidermy, raw denim Kickstarter sartorial dreamcatcher. Quinoa chambray slow-carb salvia readymade, bicycle rights 90's yr typewriter selfies letterpress cardigan vegan.
+</ul> -->
 
 ---
 
-Pug heirloom High Life vinyl swag, single-origin coffee four dollar toast taxidermy reprehenderit fap distillery master cleanse locavore. Est anim sapiente leggings Brooklyn ea. Thundercats locavore excepteur veniam eiusmod. Raw denim Truffaut Schlitz, migas sapiente Portland VHS twee Bushwick Marfa typewriter retro id keytar.
-
-> We do not grow absolutely, chronologically. We grow sometimes in one dimension, and not in another, unevenly. We grow partially. We are relative. We are mature in one realm, childish in another.
-> —Anais Nin
-
-Fap aliqua qui, scenester pug Echo Park polaroid irony shabby chic ex cardigan church-key Odd Future accusamus. Blog stumptown sartorial squid, gastropub duis aesthetic Truffaut vero. Pinterest tilde twee, odio mumblecore jean shorts lumbersexual.
+Write me an [email](zainab_iftikhar@brown.edu) or send a DM on [@ziftikha](https://twitter.com/ziftikha) for comments, suggestions, collaborations or just Ph.D. advice :)
