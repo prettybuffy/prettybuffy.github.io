@@ -29,7 +29,3 @@ I study human-AI collaboration to tackle real-world challenges, with a focus on 
 My research focuses on creating systems to enhance technology-driven accessibility in mental health support, legal aid, and public health information. -->
 
 Previously, I was a Software Engineer at [Pantera Energy](https://panteraenergy.pk) and then a Research Associate at [HCI for Social Well-being Lab](https://chisel.pk). I have a Bachelor’s degree in Computer Science from [National University of Computer & Emerging Science, Lahore](https://www.nu.edu.pk).
-
-<!-- Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them. -->
