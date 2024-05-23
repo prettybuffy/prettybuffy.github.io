@@ -10,6 +10,7 @@ email: zainab_iftikhar@brown.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Zainab Iftikhar is a Ph.D. Candidate at Brown creating systems to enhance technology-driven accessibility in mental health support, legal aid, and public health information.
 footer_text: >
+  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
 keywords: 
 lang: en 
 icon: favicon.png
