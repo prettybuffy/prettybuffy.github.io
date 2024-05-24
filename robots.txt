@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://prettybuffy.github.io//sitemap.xml
+Sitemap: https://zainabiftikhar.com//sitemap.xml
