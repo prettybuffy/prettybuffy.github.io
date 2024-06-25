@@ -19,7 +19,7 @@ An even more colorful solution are emojis and stickers, which provide a visual s
 
 ---
 
-To tackle the shortcomings of conventional messaging systems, we developed [new typing indicators](https://github.com/brownhci/live-typing) and conducted a [research study](https://zainabiftikhar.com/papers/LiveTyping_CHI23.pdf) with 24 participants. Our team investigated the impact of these new indicators on collaboration and task performance. Unlike standard indicators that simply notify when someone is typing, rich typing indicators display text in real-time as it is being composed. We employed a blend of quantitative metrics and qualitative feedback to examine how these dynamic indicators influence user interaction.
+To tackle the shortcomings of conventional messaging systems, we developed [new typing indicators](https://github.com/brownhci/live-typing) and conducted a [research study](https://zainabiftikhar.com/assets/pdf/LiveTyping_CHI23.pdf) with 24 participants. Our team investigated the impact of these new indicators on collaboration and task performance. Unlike standard indicators that simply notify when someone is typing, rich typing indicators display text in real-time as it is being composed. We employed a blend of quantitative metrics and qualitative feedback to examine how these dynamic indicators influence user interaction.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mxTISZcgRQw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -34,4 +34,4 @@ A significant finding of the study highlighted the profound impact of our typing
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">&quot;Can typing indicators in messaging really improve communication? 📲👥 Our latest research suggests YES! 🙌🏼 We found that more expressive typing indicators help people communicate better, resulting in closer connections and increased perceived co-presence. 💬💕 <a href="https://twitter.com/hashtag/chi2023?src=hash&amp;ref_src=twsrc%5Etfw">#chi2023</a> <a href="https://t.co/220lvcDtjg">pic.twitter.com/220lvcDtjg</a></p>&mdash; Zainab Iftikhar (@ziftikha) <a href="https://twitter.com/ziftikha/status/1644528149970194433?ref_src=twsrc%5Etfw">April 8, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Read our full paper [here](https://zainabiftikhar.com/papers/LiveTyping_CHI23.pdf).
+Read our full paper [here](https://zainabiftikhar.com/assets/pdf/LiveTyping_CHI23.pdf).
