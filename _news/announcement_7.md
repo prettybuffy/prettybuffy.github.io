@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Recipient of the Paris Kanellakis Graduate Fellowship Award for the Academic Year 2023-2024
+I received the Paris Kanellakis Graduate Fellowship Award for the Academic Year 2023-2024!
