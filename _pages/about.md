@@ -24,6 +24,7 @@ I’m a rising fourth-year PhD candidate in Computer Science at Brown University
 
 My research focuses on creating personalized systems to support social data-driven self-reflection. By applying computational techniques to social data, my work aims to evaluate, enhance, and build human-centered AI systems to address critical societal challenges. 
 
+My systems have been deployed in healthcare [[1]](https://corona.assisted.pk/en)[[2]](https://autism.assisted.pk/en), education, legal aid for gender-based violence [[3]](https://humqadam.shirkatgah.org/), and for the marginialised population in Global South. 
 
 <!-- I study human-AI collaboration in everyday settings, with a focus on Natural Language Processing (NLP), Human-AI Interaction, and Computational Social Science. My systems have been deployed in healthcare, education, legal aid, and for the marginialised population in Global South. My long term research goal is to improve people's lives and relationships through the design of better tech.
 
