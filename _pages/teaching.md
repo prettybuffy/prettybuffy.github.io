@@ -13,7 +13,7 @@ nav_order: 4
     <article>
         <div class="card mt-3">
             <div class="p-3">
-                <strong>NSF REU: AI for CompuTeaching Assistanttional Creativity</strong><a href="https://aireu.cs.brown.edu/"></a><br>
+                <strong>NSF REU: AI for Compuational Creativity</strong><a href="https://aireu.cs.brown.edu/"></a><br>
                 <em>Summer 2022/Summer 2023: Research Methods Study Group Leader</em>
                 <!-- <ul>
                     <li></li>
