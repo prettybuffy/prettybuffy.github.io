@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-End of an era - resigning from my position as a Research Associate at [HCI for Social Well-being Lab](https://chisel.pk/)
+End of an era - resigning from my position as a Research Associate at [HCI for Inclusion, Well-being & Learning Lab](https://chisel.pk/)

@@ -12,7 +12,7 @@ Welcome to zainabiftikhar.com
 
 Before I can begin updating you on 2023, let’s rewind back to 2018. I graduated from FAST-NUCES, Pakistan with a B Sc. in Computer Science. The four years of my life were full of interesting people, captivating lectures, and lifelong friends.
 
-After graduating, I started working as a software engineer at Pantera Energy where I loved coding and meeting clients. During my job, I decided to take some time off and back-packed in Istanbul, Turkey with one of my loveliest friends, Majlinda. After six months, I came back to Pakistan where I joined HCI for Social Well-being Lab as as a Research Associate.
+After graduating, I started working as a software engineer at Pantera Energy where I loved coding and meeting clients. During my job, I decided to take some time off and back-packed in Istanbul, Turkey with one of my loveliest friends, Majlinda. After six months, I came back to Pakistan where I joined HCI for Inclusion, Well-being & Learning Lab as as a Research Associate.
 
 > it is a serious thing
 > just to be alive
