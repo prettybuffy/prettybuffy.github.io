@@ -40,4 +40,4 @@ My long term research goal is to evaluate, enhance and build human-centered AI s
 I develop tools that not only enhance individual self-awareness and personal growth but also contribute to broader societal impacts such as improved mental health, stronger community bonds, and more informed social dynamics.
 -->
 
-Previously, I was a Software Engineer at [Pantera Energy](https://panteraenergy.pk) and then a Research Associate at [HCI for Inclusion, Well-being & Learning Lab](https://chisel.pk). I have a Bachelor’s degree in Computer Science from [National University of Computer & Emerging Science, Lahore](https://www.nu.edu.pk).
+Previously, I was a Software Engineer at [Pantera Energy](https://panteraenergy.pk) and then a Research Associate at [HCI for Inclusion, Well-being & Learning Lab](https://chisel.pk). I have a Bachelor’s degree in Computer Science from [National University of Computer & Emerging Science, Lahore](https://lhr.nu.edu.pk/).
