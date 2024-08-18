@@ -1,4 +1,1 @@
-User-agent: *
-Disallow:
-
 Sitemap: https://zainabiftikhar.com//sitemap.xml
