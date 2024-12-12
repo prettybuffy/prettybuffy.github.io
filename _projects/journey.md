@@ -2,7 +2,7 @@
 layout: page
 title: Journey
 description: Lifestyle Mobile App to Alleviate Depressive Symptoms Using Cognitive and Behavioral Strategies in mHealth
-importance: 1
+importance: 2
 category: design
 related_publications: false
 ---
@@ -36,7 +36,7 @@ This research followed three key approaches:
 </div>
 <div class="caption">
    (Left) Whiteboard divided into quadrants, with axes labeled "Behavioral Therapy" (vertical) and "Cognitive Therapy" (horizontal), as well as "Effort." Post-it notes are categorized into the quadrants, suggesting strategies or tools like "Exercise," "Mood Journal," or "Breathing". (Top-right) A wall with color-coded sticky notes, arranged into groups for a different level of categorization or clustering. 
-   (Bottom-right) A digital quadrant system, with axes labeled "General-Specific" and "Behavior-Cognition." Sticky notes are digitally positioned to align with similar categories.</p>
+   (Bottom-right) A digital quadrant system, with axes labeled "General-Specific" and "Behavior-Cognition." Sticky notes are digitally positioned to align with similar categories.
 </div>
 
 <div><br></div>
