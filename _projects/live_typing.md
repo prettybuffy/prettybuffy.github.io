@@ -19,21 +19,20 @@ In the 1980s, Daft and Lengel posed a Media Richness Theory stating that the eff
 
 <hr>
 
-### Market Gap
+### Research & Development
 
 To enhance users’ perceived social presence, is-typing indicator was introduced in instant messaging (IM) applications to support awareness of co-presence in real-time. The indicator, which shows three moving dots (…) or displays the message Person A is typing was implemented for CMC systems to facilitate awareness by providing cues that the other person is typing. However, users can feel stresses and anxious while waiting for a message response and seeing three dots (…) for an extended period of time!
 
 In this research project, we design a new interface that displays message as the user is writing it. That is, all messages would be shown [in real time]!! Real-time text (RTT) is text transmitted instantly as it is typed or created. Recipients can immediately read the message while it is being written, without waiting. RTT, or real-time text, sends text messages immediately as you type them, without requiring users to hit send.
 
-<div class="video-container" style="width: 800px;">
-  <iframe src="https://github.com/ZainabIftikhar/zainabiftikhar.github.io/assets/23429685/db1e3784-f4bf-4277-8443-c80a458a6df5" frameborder="0" allowfullscreen></iframe>
-</div>
+
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://github-production-user-asset-6210df.s3.amazonaws.com/23429685/251516669-db1e3784-f4bf-4277-8443-c80a458a6df5.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20241212%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241212T162447Z&X-Amz-Expires=300&X-Amz-Signature=ed37f25b14b7a46fd1ed892d6b4d2bc6d26764b5ff91c238cd2b772989fdc351&X-Amz-SignedHeaders=host" allowfullscreen></iframe>
 
 <hr>
 
-### Increased Perceived Co-Presence
+### User Study
 
-The findings of the study revealed that more expressive typing indicators were perceived as "rich in communication" by users. The visibility of text being typed in real-time allowed for a closer connection between individuals. By seeing the words form as they were being written, users could anticipate the direction of the conversation, making the interaction more engaging and meaningful. These indicators acted as a bridge to fill the void created by the absence of non-verbal cues, enabling users to establish a stronger connection with their conversation partners. Wouldn't it be reassuring to have a glimpse into the other person's thoughts and intentions while you're both engaged in a messaging conversation?
+The findings of the user study (N=24) showed that more expressive typing indicators were perceived as "rich in communication" by users. The visibility of text being typed in real-time allowed for a closer connection between individuals. By seeing the words form as they were being written, users could anticipate the direction of the conversation, making the interaction more engaging and meaningful. These indicators acted as a bridge to fill the void created by the absence of non-verbal cues, enabling users to establish a stronger connection with their conversation partners. Wouldn't it be reassuring to have a glimpse into the other person's thoughts and intentions while you're both engaged in a messaging conversation?
 
 Another notable outcome of the study was the impact of rich typing indicators on users' perceived co-presence. Co-presence refers to the sense of being together with someone, even in a digital environment. The heightened co-presence of these typing indicators was reflective in multiple themes associated with real-time text visibility: for instance, the indicator was validating, encouraged active listening, and was highly communicative, fostering connection. Imagine feeling as if you were physically present with the other person, despite the physical distance.
 
