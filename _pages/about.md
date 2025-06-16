@@ -23,6 +23,7 @@ social: true # includes social icons at the bottom of the page
 I’m a rising fifth-year PhD candidate in Computer Science at Brown University, where I am advised by [Jeff Huang](https://jeffhuang.com/).
 
 My research focuses on creating personalized systems to support social data-driven self-reflection. By applying computational techniques to social data, my work aims to build systems that support people's social and mental health needs.
+<!--I build tools to help people reflect on and manage their social and mental health-->
 
 My systems have been deployed in healthcare [[1]](https://corona.assisted.pk/en)[[2]](https://autism.assisted.pk/en), education, legal aid for gender-based violence [[3]](https://humqadam.shirkatgah.org/), and for the marginalized population in the Global South. 
 
