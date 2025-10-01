@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-emphasis: #007bff;
+  --color-highlight: #f59e0b; /* Tailwind amber-400 */
+}
