@@ -8,7 +8,7 @@ const papers = [
     venue: "AAAI/AIES 2025",
     /*award: "(Best Paper Award)",*/
     pdf: "/papers/EthicalFramework_AAAI25.pdf",
-    doi: ""
+    doi: "https://ojs.aaai.org/index.php/AIES/article/view/36632"
   },
   {
     title: "Therapy as an NLP Task: Psychologists' Comparison of LLMs and Human Peers in CBT",

@@ -16,7 +16,15 @@ export default function Profile() {
         <div className="mt-6">
           <h2 className="font-semibold">News</h2>
           <p className="">
-            My recent paper on LLMs’ ethical violations in mental health
+            My recent 
+            <a
+              href="https://ojs.aaai.org/index.php/AIES/article/view/36632"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emphasis hover:text-highlight"
+            >
+              {" "}
+            AAAI/AIES 2025 paper on LLMs’ ethical violations in mental health
             practice has received widespread media coverage, with features in{" "}
             <a
               href="https://www.theguardian.com/technology/2025/nov/02/openai-chatgpt-mental-health-problems-updates"
