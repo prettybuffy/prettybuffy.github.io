@@ -23,9 +23,9 @@ export default function Profile() {
               rel="noopener noreferrer"
               className="text-emphasis hover:text-highlight"
             >
-              {" "}
             AAAI/AIES 2025 paper on LLMs’ ethical violations in mental health
             practice has received widespread media coverage, with features in{" "}
+            </a>
             <a
               href="https://www.theguardian.com/technology/2025/nov/02/openai-chatgpt-mental-health-problems-updates"
               target="_blank"
