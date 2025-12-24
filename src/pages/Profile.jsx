@@ -15,8 +15,50 @@ export default function Profile() {
       </div>
       <div className="mt-6">
         <h2 className="font-semibold">News</h2>
-        <p className="">I'm leading a workshop on the use of AI and LLMs in social science research
-        at the Association for Psychological Science APS on October 22 4:00 pm EDT.
+        <p className="">
+    My recent paper on LLMs’ ethical violations in mental health practice has received widespread media coverage, with features in{" "}
+    <a
+      href="https://www.theguardian.com/technology/2025/nov/02/openai-chatgpt-mental-health-problems-updates"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      The Guardian
+    </a>
+    ,{" "}
+    <a
+      href="https://www.linkedin.com/posts/aprilyjkoh_mental-health-check-with-april-koh-102425-activity-7388654424107147265-WcGS/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      NBC News
+    </a>
+    ,{" "}
+    <a
+      href="https://www.politico.com/newsletters/future-pulse/2025/10/30/a-rundown-on-ai-chatbot-bills-in-the-states-00629577"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      Politico
+    </a>
+    , and{" "}
+    <a
+      href="https://www.sciencenews.org/article/teens-crisis-ai-chatbots-risks-mental"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      Science News
+    </a>
+    .
+        
+        
+        
+        
+        
+        
         </p>
       </div>
       </div>

@@ -1,12 +1,9 @@
 import React from 'react';
 
 const news = [
- {
-    title: "Lead the Workshop on the Use of AI and LLMs in Social Science Research at APS",
-    date: "Oct 22, 2025"
- },
- {
-    title: "Invited Talk: Integrating AI Into the Mental Health Sector at the Association for Psychological Science (APS)",
+  {
+    publisher: "Association for Psychological Science (APS)",
+    title: "Invited Talk: Integrating AI Into the Mental Health Sector",
     date: "Oct 22, 2025"
  },
  {
