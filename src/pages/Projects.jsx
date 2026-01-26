@@ -14,6 +14,12 @@ const projects = [
     type: "ongoing"
   },
   {
+    title: "Health \& Wellness Applications for Specialised Populations",
+    description: `Over the past few years, I've worked with diverse populations—including people with mental health concerns, teens, children with special needs, older adults, and low-income or low tech-savvy users 
+    to design healthcare and learning technologies. Using participatory design, mixed methods, and human factors, this work focused on building and shipping accessible systems that support wellbeing, learning, and care access in real-world settings.`,
+    type: "ongoing"
+  },
+  {
     title: "ML-Driven Personal Data Visualization for Social and Behavioral Insights",
     description: `The way you communicated in 2018 is likely not the same as how you communicate today. While individuals change over time, our digital traces often remain static, fragmanted and disconnected.
     Using machine learning within a Personal Informatics framework, I'm building personalised systems that analyze long-term everyday digital traces to help users reflect on how they've changed over 
@@ -27,7 +33,7 @@ const projects = [
     type: "ongoing"
 
   },
-    {
+  {
     title: "Integrating Responsible AI into the Workplace",
     description: `As AI systems are adopted across several workplaces (from programming to healthcare), they are reshaping decision-making, collaboration, and task delegation. How then can we develop AI systems that augment 
     human expertise while preserving human oversight, accountability, and trust? Through mixed-methods studies, policy analysis and design research, 
