@@ -8,7 +8,7 @@ export default function About() {
             <a href="https://jeffhuang.com" className="text-emphasis hover:text-highlight">Jeff Huang </a> 
             in the {' '}
             <a href="https://jeffhuang.com/hci/" className="text-emphasis hover:text-highlight"> HCI Lab. </a> My research 
-            focuses on {' '} <a href="/projects" className="text-emphasis hover:text-highlight">developing personalised systems</a>{' '} including AI agents,
+            focuses on {' '} <a href="/projects" className="text-emphasis hover:text-highlight">building human-centered AI systems</a>{' '}
             to support users' physical, cognitive, 
             and emotional well-being. By applying computational and visualisation 
             techniques to user's health and communication data, my work aims to a) help individuals understand their behaviors
