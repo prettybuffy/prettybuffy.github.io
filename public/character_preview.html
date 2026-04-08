@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Previews</title>
+<style>
+  body {
+    background: #87ceeb;
+    font-family: -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    margin: 0;
+  }
+  h1 { color: #1a1a2e; margin-bottom: 8px; font-size: 22px; }
+  p.sub { color: #444; margin-bottom: 40px; font-size: 14px; }
+
+  .row {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 36px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    min-width: 180px;
+  }
+  .card h2 {
+    font-size: 15px;
+    color: #1a1a2e;
+    margin: 0;
+    text-align: center;
+  }
+  .card p {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+    text-align: center;
+    max-width: 140px;
+    line-height: 1.5;
+  }
+  .char-wrap {
+    position: relative;
+    height: 110px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* ground strip under each character */
+  .ground {
+    width: 120px;
+    height: 18px;
+    background: linear-gradient(180deg, #5a9e35, #2d6e18);
+    border-radius: 0 0 12px 12px;
+    position: relative;
+  }
+  .ground::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 5px;
+    background: #c8a053;
+  }
+
+  .original-badge {
+    background: #e8f4fd;
+    border: 1.5px solid #90caf9;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: #1565c0;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<h1>Character Previews</h1>
+<p class="sub">All four walking on the same ground — pick your favourite</p>
+
+<div class="row">
+
+  <!-- ORIGINAL -->
+  <div class="card">
+    <h2>Original</h2>
+    <span class="original-badge">current</span>
+    <div class="char-wrap">
+      <svg id="orig" viewBox="0 0 52 90" width="52" height="90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="26" cy="89" rx="17" ry="4.5" fill="rgba(0,0,0,0.09)"/>
+        <g id="o-leg-l" style="transform-origin:19px 60px">
+          <line x1="19" y1="60" x2="14" y2="82" stroke="#37474f" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="12" cy="83" rx="5.5" ry="2.5" fill="#212121" transform="rotate(-8,12,83)"/>
+        </g>
+        <g id="o-leg-r" style="transform-origin:33px 60px">
+          <line x1="33" y1="60" x2="38" y2="82" stroke="#37474f" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="40" cy="83" rx="5.5" ry="2.5" fill="#212121" transform="rotate(8,40,83)"/>
+        </g>
+        <path d="M11,28 Q9,42 10,60 L42,60 Q43,42 41,28 Q36,24 26,24 Q16,24 11,28 Z" fill="#00796b"/>
+        <path d="M22,28 Q26,34 30,28" stroke="#004d40" stroke-width="1.5" fill="none"/>
+        <g id="o-arm-l" style="transform-origin:11px 32px">
+          <line x1="11" y1="32" x2="1" y2="52" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <g id="o-arm-r" style="transform-origin:41px 32px">
+          <line x1="41" y1="32" x2="51" y2="52" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <rect x="22" y="21" width="8" height="9" rx="3" fill="#f0a070"/>
+        <circle cx="26" cy="14" r="13" fill="#f0a070"/>
+        <path d="M13,10 Q12,26 15,32" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M39,10 Q40,26 37,32" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M13,11 Q14,0 26,1 Q38,0 39,11 Q34,5 26,6 Q18,5 13,11 Z" fill="#1a0a00"/>
+        <circle cx="21" cy="13" r="2.5" fill="white"/>
+        <circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="21.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <circle cx="31.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <path d="M21 18.5 Q26 23 31 18.5" stroke="#b85c20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="13" cy="17" r="1.5" fill="#ffd700"/>
+        <circle cx="39" cy="17" r="1.5" fill="#ffd700"/>
+      </svg>
+    </div>
+    <p>Realistic proportions, teal shirt, long hair, gold earrings</p>
+  </div>
+
+  <!-- OPTION 1: PIXEL -->
+  <div class="card">
+    <h2>Option 1</h2>
+    <p style="color:#e91e63; font-weight:700; margin-bottom:-8px;">Pixel / 8-bit</p>
+    <div class="char-wrap">
+      <svg id="p1" viewBox="0 0 52 90" width="52" height="90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="26" cy="89" rx="14" ry="3.5" fill="rgba(0,0,0,0.1)"/>
+        <g id="p-leg-l" style="transform-origin:18px 62px">
+          <rect x="13" y="62" width="9" height="18" rx="2" fill="#37474f"/>
+          <rect x="10" y="78" width="13" height="5" rx="2" fill="#212121"/>
+        </g>
+        <g id="p-leg-r" style="transform-origin:34px 62px">
+          <rect x="30" y="62" width="9" height="18" rx="2" fill="#37474f"/>
+          <rect x="29" y="78" width="13" height="5" rx="2" fill="#212121"/>
+        </g>
+        <rect x="12" y="30" width="28" height="32" rx="4" fill="#e91e63"/>
+        <g id="p-arm-l" style="transform-origin:12px 34px">
+          <rect x="2" y="34" width="10" height="20" rx="4" fill="#f0a070"/>
+        </g>
+        <g id="p-arm-r" style="transform-origin:40px 34px">
+          <rect x="40" y="34" width="10" height="20" rx="4" fill="#f0a070"/>
+        </g>
+        <rect x="22" y="24" width="8" height="8" rx="2" fill="#f0a070"/>
+        <rect x="13" y="6" width="26" height="22" rx="6" fill="#f0a070"/>
+        <rect x="13" y="4" width="26" height="10" rx="5" fill="#1a0a00"/>
+        <rect x="10" y="8" width="5" height="10" rx="2" fill="#1a0a00"/>
+        <rect x="37" y="8" width="5" height="10" rx="2" fill="#1a0a00"/>
+        <rect x="18" y="13" width="5" height="5" rx="1" fill="white"/>
+        <rect x="29" y="13" width="5" height="5" rx="1" fill="white"/>
+        <rect x="19.5" y="14.5" width="2.5" height="2.5" fill="#1a0a00"/>
+        <rect x="30.5" y="14.5" width="2.5" height="2.5" fill="#1a0a00"/>
+        <rect x="20" y="22" width="12" height="2.5" rx="1.5" fill="#c2185b"/>
+      </svg>
+    </div>
+    <p>Blocky retro shapes, pink outfit, squared-off pixel look</p>
+  </div>
+
+  <!-- OPTION 2: CHIBI -->
+  <div class="card">
+    <h2>Option 2</h2>
+    <p style="color:#5c6bc0; font-weight:700; margin-bottom:-8px;">Chibi / Round</p>
+    <div class="char-wrap">
+      <svg id="p2" viewBox="0 0 52 90" width="52" height="90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="26" cy="89" rx="13" ry="3" fill="rgba(0,0,0,0.09)"/>
+        <g id="c-leg-l" style="transform-origin:20px 68px">
+          <line x1="20" y1="68" x2="16" y2="84" stroke="#5c6bc0" stroke-width="7" stroke-linecap="round"/>
+        </g>
+        <g id="c-leg-r" style="transform-origin:32px 68px">
+          <line x1="32" y1="68" x2="36" y2="84" stroke="#5c6bc0" stroke-width="7" stroke-linecap="round"/>
+        </g>
+        <ellipse cx="26" cy="62" rx="12" ry="10" fill="#7986cb"/>
+        <g id="c-arm-l" style="transform-origin:14px 58px">
+          <line x1="14" y1="58" x2="4" y2="70" stroke="#f0a070" stroke-width="6" stroke-linecap="round"/>
+        </g>
+        <g id="c-arm-r" style="transform-origin:38px 58px">
+          <line x1="38" y1="58" x2="48" y2="70" stroke="#f0a070" stroke-width="6" stroke-linecap="round"/>
+        </g>
+        <circle cx="26" cy="30" r="22" fill="#f0a070"/>
+        <path d="M4,28 Q5,6 26,4 Q47,6 48,28 Q42,14 26,13 Q10,14 4,28 Z" fill="#1a0a00"/>
+        <path d="M4,28 Q2,38 5,44" stroke="#1a0a00" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M48,28 Q50,38 47,44" stroke="#1a0a00" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <circle cx="19" cy="31" r="4.5" fill="white"/>
+        <circle cx="33" cy="31" r="4.5" fill="white"/>
+        <circle cx="20" cy="32" r="2.5" fill="#1a0a00"/>
+        <circle cx="34" cy="32" r="2.5" fill="#1a0a00"/>
+        <circle cx="21" cy="31" r="1" fill="white"/>
+        <circle cx="35" cy="31" r="1" fill="white"/>
+        <path d="M18 40 Q26 47 34 40" stroke="#c0392b" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="14" cy="38" rx="4" ry="2.5" fill="#ffb3b3" opacity="0.6"/>
+        <ellipse cx="38" cy="38" rx="4" ry="2.5" fill="#ffb3b3" opacity="0.6"/>
+        <circle cx="4" cy="35" r="1.8" fill="#ffd700"/>
+        <circle cx="48" cy="35" r="1.8" fill="#ffd700"/>
+      </svg>
+    </div>
+    <p>Big head, big eyes, blush cheeks — cute anime-style</p>
+  </div>
+
+  <!-- OPTION 3: MINIMAL -->
+  <div class="card">
+    <h2>Option 3</h2>
+    <p style="color:#388e3c; font-weight:700; margin-bottom:-8px;">Minimal / Line art</p>
+    <div class="char-wrap">
+      <svg id="p3" viewBox="0 0 52 90" width="52" height="90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="26" cy="89" rx="14" ry="3.5" fill="rgba(0,0,0,0.08)"/>
+        <g id="m-leg-l" style="transform-origin:20px 62px">
+          <line x1="20" y1="62" x2="15" y2="83" stroke="#333" stroke-width="4.5" stroke-linecap="round"/>
+          <line x1="15" y1="83" x2="8" y2="83" stroke="#333" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <g id="m-leg-r" style="transform-origin:32px 62px">
+          <line x1="32" y1="62" x2="37" y2="83" stroke="#333" stroke-width="4.5" stroke-linecap="round"/>
+          <line x1="37" y1="83" x2="44" y2="83" stroke="#333" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <path d="M14,30 Q12,46 14,62 L38,62 Q40,46 38,30 Q32,26 26,26 Q20,26 14,30Z" fill="#e8f5e9"/>
+        <path d="M14,30 Q12,46 14,62 L38,62 Q40,46 38,30 Q32,26 26,26 Q20,26 14,30Z"
+              fill="none" stroke="#333" stroke-width="2.5"/>
+        <g id="m-arm-l" style="transform-origin:14px 33px">
+          <line x1="14" y1="33" x2="3" y2="52" stroke="#f0a070" stroke-width="4.5" stroke-linecap="round"/>
+        </g>
+        <g id="m-arm-r" style="transform-origin:38px 33px">
+          <line x1="38" y1="33" x2="49" y2="52" stroke="#f0a070" stroke-width="4.5" stroke-linecap="round"/>
+        </g>
+        <rect x="22" y="22" width="8" height="7" rx="3" fill="#f0a070"/>
+        <circle cx="26" cy="14" r="12" fill="#f0a070" stroke="#e8956a" stroke-width="1"/>
+        <path d="M14,12 Q15,1 26,1 Q37,1 38,12 Q33,6 26,7 Q19,6 14,12 Z" fill="#1a0a00"/>
+        <path d="M14,12 Q12,22 14,30" stroke="#1a0a00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M38,12 Q40,22 38,30" stroke="#1a0a00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="21" cy="13" r="1.8" fill="#1a0a00"/>
+        <circle cx="31" cy="13" r="1.8" fill="#1a0a00"/>
+        <path d="M18,9.5 Q21,8 24,9.5" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M28,9.5 Q31,8 34,9.5" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M21 18.5 Q26 23 31 18.5" stroke="#c0784a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="14" cy="17" r="1.4" fill="#ffd700"/>
+        <circle cx="38" cy="17" r="1.4" fill="#ffd700"/>
+      </svg>
+    </div>
+    <p>Clean outlines, light green outfit, eyebrows, flat style</p>
+  </div>
+
+</div>
+
+<script>
+// Animate all four characters walking simultaneously
+let tick = 0;
+
+const chars = [
+  { ll: 'o-leg-l', lr: 'o-leg-r', al: 'o-arm-l', ar: 'o-arm-r' },
+  { ll: 'p-leg-l', lr: 'p-leg-r', al: 'p-arm-l', ar: 'p-arm-r' },
+  { ll: 'c-leg-l', lr: 'c-leg-r', al: 'c-arm-l', ar: 'c-arm-r' },
+  { ll: 'm-leg-l', lr: 'm-leg-r', al: 'm-arm-l', ar: 'm-arm-r' },
+];
+
+function animate() {
+  tick += 0.12;
+  const a = Math.sin(tick) * 22;
+  chars.forEach(c => {
+    document.getElementById(c.ll).style.transform = `rotate(${a}deg)`;
+    document.getElementById(c.lr).style.transform = `rotate(${-a}deg)`;
+    document.getElementById(c.al).style.transform = `rotate(${-a * 0.5}deg)`;
+    document.getElementById(c.ar).style.transform = `rotate(${a * 0.5}deg)`;
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Character</title>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #07071a;
+  font-family: -apple-system, 'Segoe UI', sans-serif;
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  user-select: none;
+}
+.stars {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 28% 72%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 44%  9%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 62% 55%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 78% 31%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 91% 83%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at  6% 90%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 52% 42%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 36% 64%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 85% 12%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 70% 78%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 20% 44%, rgba(255,255,255,0.7), transparent);
+}
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:1000;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px);
+}
+.page { position:relative; z-index:1; }
+
+/* ── Header ── */
+.header { text-align:center; padding:48px 20px 16px; }
+.header-label { font-size:11px; letter-spacing:8px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:14px; }
+.header h1 {
+  font-size:clamp(20px,5vw,52px); font-weight:900; letter-spacing:12px; text-transform:uppercase;
+  background:linear-gradient(90deg,#ffd700 0%,#fff 45%,#ffd700 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:10px;
+}
+.header-sub { font-size:12px; color:rgba(255,255,255,0.35); letter-spacing:4px; text-transform:uppercase; }
+.divider { width:100%; max-width:700px; height:1px; background:linear-gradient(90deg,transparent,rgba(255,215,0,0.3),transparent); margin:20px auto 0; }
+
+/* ── Grid ── */
+.char-grid {
+  display:flex; justify-content:center;
+  gap:clamp(10px,2.5vw,28px);
+  padding:44px 24px 16px; flex-wrap:wrap;
+}
+
+.char-card {
+  width:clamp(148px,18vw,188px); cursor:pointer;
+  border-radius:20px; border:1.5px solid rgba(255,255,255,0.07);
+  background:rgba(255,255,255,0.028); backdrop-filter:blur(6px);
+  overflow:hidden;
+  transition:transform .32s cubic-bezier(.34,1.4,.64,1), border-color .25s, box-shadow .3s, background .25s;
+  position:relative; display:flex; flex-direction:column; align-items:center;
+}
+.char-card:hover { transform:translateY(-8px); background:rgba(255,255,255,0.05); }
+.char-card.selected { transform:translateY(-14px) scale(1.04); }
+
+.card-bar { width:100%; height:4px; transition:height .3s; }
+.char-card.selected .card-bar { height:6px; }
+
+.portrait-wrap { width:100%; padding:20px 20px 0; display:flex; justify-content:center; }
+.portrait-wrap svg { border-radius:50%; display:block; }
+
+.sprite-wrap { height:72px; display:flex; align-items:flex-end; justify-content:center; margin:4px 0 2px; }
+
+.card-footer { width:100%; padding:10px 14px 18px; text-align:center; }
+.card-name { font-size:12px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:5px; }
+.card-role { font-size:10px; color:rgba(255,255,255,0.65); letter-spacing:1.2px; line-height:1.6; }
+
+.char-card::before, .char-card::after {
+  content:''; position:absolute; width:18px; height:18px; opacity:0; transition:opacity .25s;
+}
+.char-card::before { top:8px; left:8px; border-top:2px solid currentColor; border-left:2px solid currentColor; border-radius:3px 0 0 0; }
+.char-card::after  { bottom:8px; right:8px; border-bottom:2px solid currentColor; border-right:2px solid currentColor; border-radius:0 0 3px 0; }
+.char-card.selected::before, .char-card.selected::after { opacity:1; }
+
+/* ── Start zone ── */
+#start-zone { display:flex; flex-direction:column; align-items:center; gap:14px; padding:20px 24px 0; min-height:90px; }
+#start-btn {
+  display:none; padding:18px 64px; border:none; border-radius:60px;
+  font-size:14px; font-weight:900; letter-spacing:5px; text-transform:uppercase;
+  cursor:pointer; font-family:inherit; color:#07071a; position:relative; overflow:hidden;
+  transition:transform .2s, box-shadow .2s;
+  animation:btnPop .45s cubic-bezier(.34,1.5,.64,1) forwards;
+}
+#start-btn:hover { transform:scale(1.06); }
+#start-btn:active { transform:scale(0.96); }
+@keyframes btnPop {
+  from { opacity:0; transform:scale(0.8) translateY(12px); }
+  to   { opacity:1; transform:scale(1)   translateY(0); }
+}
+#start-tagline {
+  display:none; font-size:14px; color:rgba(255,255,255,0.55);
+  letter-spacing:.5px; font-style:italic; text-align:center;
+  max-width:440px; line-height:1.8;
+  animation:fadeIn .5s .15s ease forwards; opacity:0;
+}
+@keyframes fadeIn { to { opacity:1; } }
+
+/* ── Stats ── */
+#stats-panel { max-width:560px; margin:24px auto 0; padding:0 24px; min-height:130px; }
+.stats-box { display:none; border-radius:18px; padding:24px 28px; animation:riseUp .4s cubic-bezier(.34,1.3,.64,1) forwards; }
+.stats-box.show { display:block; }
+@keyframes riseUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.stats { display:flex; flex-direction:column; gap:10px; }
+.stat-row { display:flex; align-items:center; gap:14px; }
+.stat-label { font-size:9px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; width:82px; color:rgba(255,255,255,0.55); }
+.stat-bar-bg { flex:1; height:5px; background:rgba(255,255,255,0.07); border-radius:3px; overflow:hidden; }
+.stat-bar { height:100%; border-radius:3px; width:0; transition:width 1s cubic-bezier(.34,1.2,.64,1); }
+
+.bottom-pad { height:60px; }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="page">
+
+<div class="header">
+  <div class="header-label">Zainab Iftikhar</div>
+  <h1>Choose Your Character</h1>
+  <div class="header-sub">Four sides of the same person</div>
+  <div class="divider"></div>
+</div>
+
+<div class="char-grid">
+
+  <!-- ══════════════════════════════════
+       1. RESEARCHER
+  ══════════════════════════════════ -->
+  <div class="char-card" id="card-0" onclick="selectChar(0)" style="color:#ff6b6b">
+    <div class="card-bar" style="background:linear-gradient(90deg,#7b1a1a,#e53935)"></div>
+
+    <!-- Portrait: blazer, rectangular glasses, hair bun, book -->
+    <div class="portrait-wrap">
+      <svg viewBox="0 0 100 100" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="50" fill="#7b1a1a"/>
+        <!-- shoulders/blazer -->
+        <path d="M8,100 Q18,66 50,60 Q82,66 92,100Z" fill="#5a1010"/>
+        <!-- shirt at collar -->
+        <path d="M38,62 L50,70 L62,62" fill="#f0ece0"/>
+        <path d="M38,62 Q42,72 50,70" stroke="#3a0a0a" stroke-width="1" fill="none"/>
+        <path d="M62,62 Q58,72 50,70" stroke="#3a0a0a" stroke-width="1" fill="none"/>
+        <!-- neck -->
+        <rect x="43" y="53" width="14" height="12" rx="5" fill="#d4896a"/>
+        <!-- head -->
+        <circle cx="50" cy="42" r="22" fill="#d4896a"/>
+        <!-- hair top -->
+        <path d="M28,38 Q30,16 50,15 Q70,16 72,38 Q66,26 50,27 Q34,26 28,38Z" fill="#1a0a00"/>
+        <path d="M28,38 Q26,46 28,54" stroke="#1a0a00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- bun -->
+        <circle cx="70" cy="22" r="9" fill="#1a0a00"/>
+        <circle cx="70" cy="22" r="5" fill="#2a1000"/>
+        <!-- rectangular glasses -->
+        <rect x="32" y="39" width="14" height="9" rx="2" fill="rgba(255,255,255,0.08)" stroke="#222" stroke-width="2"/>
+        <rect x="53" y="39" width="14" height="9" rx="2" fill="rgba(255,255,255,0.08)" stroke="#222" stroke-width="2"/>
+        <line x1="46" y1="43.5" x2="53"  y2="43.5" stroke="#222" stroke-width="1.5"/>
+        <line x1="24" y1="43.5" x2="32"  y2="43.5" stroke="#222" stroke-width="1.5"/>
+        <line x1="67" y1="43.5" x2="76"  y2="43.5" stroke="#222" stroke-width="1.5"/>
+        <!-- eyes -->
+        <circle cx="39" cy="43.5" r="2.2" fill="#1a0a00"/>
+        <circle cx="60" cy="43.5" r="2.2" fill="#1a0a00"/>
+        <!-- smile -->
+        <path d="M40,53 Q50,60 60,53" stroke="#a05020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- earring -->
+        <circle cx="28" cy="48" r="3" fill="#ffd700"/>
+        <!-- book in hand -->
+        <rect x="62" y="70" width="22" height="16" rx="2" fill="#c8952a" transform="rotate(-18,72,78)"/>
+        <rect x="62" y="70" width="4"  height="16" rx="1" fill="#a07820" transform="rotate(-18,72,78)"/>
+        <line x1="68" y1="70" x2="66" y2="85" stroke="rgba(0,0,0,0.2)" stroke-width="1" transform="rotate(-18,72,78)"/>
+        <line x1="72" y1="70" x2="70" y2="85" stroke="rgba(0,0,0,0.2)" stroke-width="1" transform="rotate(-18,72,78)"/>
+      </svg>
+    </div>
+
+    <div class="sprite-wrap">
+      <svg viewBox="0 0 52 90" width="42" height="72" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <ellipse cx="26" cy="89" rx="15" ry="4" fill="rgba(255,107,107,0.2)"/>
+        <g id="c0-ll" style="transform-origin:19px 60px">
+          <line x1="19" y1="60" x2="14" y2="82" stroke="#1a237e" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="12" cy="83" rx="5.5" ry="2.5" fill="#111" transform="rotate(-8,12,83)"/>
+        </g>
+        <g id="c0-lr" style="transform-origin:33px 60px">
+          <line x1="33" y1="60" x2="38" y2="82" stroke="#1a237e" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="40" cy="83" rx="5.5" ry="2.5" fill="#111" transform="rotate(8,40,83)"/>
+        </g>
+        <path d="M11,28 Q9,43 10,60 L42,60 Q43,43 41,28 Q36,24 26,24 Q16,24 11,28Z" fill="#7b1a1a"/>
+        <path d="M22,28 L26,35 L30,28" fill="#f5f0e0"/>
+        <g id="c0-al" style="transform-origin:11px 32px">
+          <line x1="11" y1="32" x2="2" y2="52" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <g id="c0-ar" style="transform-origin:41px 32px">
+          <line x1="41" y1="32" x2="50" y2="52" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+          <rect x="44" y="48" width="10" height="7" rx="1.5" fill="#d4a843"/>
+          <rect x="44" y="48" width="2.5" height="7" rx="1" fill="#b88a28"/>
+        </g>
+        <rect x="22" y="21" width="8" height="9" rx="3" fill="#f0a070"/>
+        <circle cx="26" cy="14" r="13" fill="#f0a070"/>
+        <path d="M13,11 Q14,0 26,1 Q38,0 39,11 Q34,5 26,6 Q18,5 13,11Z" fill="#1a0a00"/>
+        <path d="M13,10 Q12,17 14,23" stroke="#1a0a00" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="38" cy="6" r="5.5" fill="#1a0a00"/>
+        <rect x="16.5" y="10.5" width="7.5" height="5.5" rx="1.5" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <rect x="27"   y="10.5" width="7.5" height="5.5" rx="1.5" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <line x1="24" y1="13" x2="27" y2="13" stroke="#2a2a2a" stroke-width="1"/>
+        <circle cx="20.5" cy="13.5" r="1.2" fill="#1a0a00"/>
+        <circle cx="30.5" cy="13.5" r="1.2" fill="#1a0a00"/>
+        <path d="M21,19 Q26,23 31,19" stroke="#b85c20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="13" cy="17" r="1.5" fill="#ffd700"/>
+      </svg>
+    </div>
+
+    <div class="card-footer">
+      <div class="card-name" style="color:#ff6b6b">The Researcher</div>
+      <div class="card-role">PhD · HCI · Brown</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       2. ADVENTURER
+  ══════════════════════════════════ -->
+  <div class="char-card" id="card-1" onclick="selectChar(1)" style="color:#ffb74d">
+    <div class="card-bar" style="background:linear-gradient(90deg,#c0622a,#ffa726)"></div>
+
+    <!-- Portrait: dupatta, jhumka earrings, bindi, teal kameez -->
+    <div class="portrait-wrap">
+      <svg viewBox="0 0 100 100" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="50" fill="#005662"/>
+        <!-- dupatta drape from left shoulder -->
+        <path d="M4,100 Q8,72 14,58 Q20,46 28,42 Q20,52 20,64 Q18,80 16,100Z" fill="#c0622a" opacity="0.92"/>
+        <!-- dupatta gold border -->
+        <path d="M14,58 Q20,46 28,42 Q20,52 20,64" stroke="#ffd700" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <!-- shoulders/kameez -->
+        <path d="M8,100 Q18,66 50,60 Q82,66 92,100Z" fill="#006e74"/>
+        <!-- embroidery neckline -->
+        <path d="M36,62 Q50,68 64,62" stroke="#ffd700" stroke-width="1.8" fill="none" opacity="0.8"/>
+        <path d="M40,64 Q50,69 60,64" stroke="#ffd700" stroke-width="1"   fill="none" opacity="0.5"/>
+        <!-- neck -->
+        <rect x="43" y="53" width="14" height="12" rx="5" fill="#d4896a"/>
+        <!-- head -->
+        <circle cx="50" cy="42" r="22" fill="#d4896a"/>
+        <!-- long hair -->
+        <path d="M28,39 Q24,56 26,72" stroke="#1a0a00" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M72,39 Q76,56 74,72" stroke="#1a0a00" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <!-- hair top -->
+        <path d="M28,40 Q30,17 50,16 Q70,17 72,40 Q66,27 50,28 Q34,27 28,40Z" fill="#1a0a00"/>
+        <!-- eyes — big, expressive -->
+        <circle cx="41" cy="41" r="4.5" fill="white"/>
+        <circle cx="59" cy="41" r="4.5" fill="white"/>
+        <circle cx="42" cy="42" r="2.6" fill="#1a0a00"/>
+        <circle cx="60" cy="42" r="2.6" fill="#1a0a00"/>
+        <circle cx="43" cy="40.5" r="1.1" fill="white"/>
+        <circle cx="61" cy="40.5" r="1.1" fill="white"/>
+        <!-- confident smile -->
+        <path d="M40,52 Q50,60 60,52" stroke="#a05020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- bindi -->
+        <circle cx="50" cy="32" r="2.5" fill="#e53935"/>
+        <!-- jhumka earrings: gold circle + drop -->
+        <circle cx="26" cy="44" r="5"   fill="#ffd700"/>
+        <circle cx="26" cy="44" r="2.5" fill="#c8a000"/>
+        <ellipse cx="26" cy="53" rx="3.5" ry="7" fill="#ffd700"/>
+        <circle cx="26" cy="60" r="3"   fill="#e6b800"/>
+        <circle cx="74" cy="44" r="5"   fill="#ffd700"/>
+        <circle cx="74" cy="44" r="2.5" fill="#c8a000"/>
+        <ellipse cx="74" cy="53" rx="3.5" ry="7" fill="#ffd700"/>
+        <circle cx="74" cy="60" r="3"   fill="#e6b800"/>
+      </svg>
+    </div>
+
+    <div class="sprite-wrap">
+      <svg viewBox="-4 0 60 90" width="42" height="72" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <ellipse cx="26" cy="89" rx="15" ry="4" fill="rgba(255,183,77,0.2)"/>
+        <g id="c1-ll" style="transform-origin:19px 60px">
+          <line x1="19" y1="60" x2="14" y2="82" stroke="#4a3000" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="12" cy="83" rx="5.5" ry="2.5" fill="#3a2000" transform="rotate(-8,12,83)"/>
+        </g>
+        <g id="c1-lr" style="transform-origin:33px 60px">
+          <line x1="33" y1="60" x2="38" y2="82" stroke="#4a3000" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="40" cy="83" rx="5.5" ry="2.5" fill="#3a2000" transform="rotate(8,40,83)"/>
+        </g>
+        <path d="M11,28 Q8,43 10,60 L42,60 Q44,43 41,28 Q36,23 26,23 Q16,23 11,28Z" fill="#00696e"/>
+        <path d="M20,29 Q26,34 32,29" stroke="#ffd700" stroke-width="1.2" fill="none" opacity="0.7"/>
+        <path d="M11,28 Q5,24 2,30 Q-1,38 3,46 Q7,52 12,48 Q7,40 9,32Z" fill="#c0622a" opacity="0.9"/>
+        <g id="c1-al" style="transform-origin:11px 32px">
+          <line x1="11" y1="32" x2="1" y2="52" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <g id="c1-ar" style="transform-origin:41px 32px">
+          <line x1="41" y1="32" x2="51" y2="52" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <rect x="22" y="21" width="8" height="9" rx="3" fill="#f0a070"/>
+        <circle cx="26" cy="14" r="13" fill="#f0a070"/>
+        <path d="M13,10 Q11,26 13,38" stroke="#1a0a00" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M39,10 Q41,26 39,38" stroke="#1a0a00" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M13,11 Q14,0 26,1 Q38,0 39,11 Q34,5 26,6 Q18,5 13,11Z" fill="#1a0a00"/>
+        <circle cx="21" cy="13" r="2.5" fill="white"/>
+        <circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="21.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <circle cx="31.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <path d="M21,18.5 Q26,23 31,18.5" stroke="#b85c20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="13" cy="16" r="2.2" fill="#ffd700"/>
+        <ellipse cx="13" cy="21" rx="1.6" ry="3.2" fill="#ffd700"/>
+        <circle cx="13" cy="24" r="1.2" fill="#e6b800"/>
+        <circle cx="39" cy="16" r="2.2" fill="#ffd700"/>
+        <ellipse cx="39" cy="21" rx="1.6" ry="3.2" fill="#ffd700"/>
+        <circle cx="39" cy="24" r="1.2" fill="#e6b800"/>
+      </svg>
+    </div>
+
+    <div class="card-footer">
+      <div class="card-name" style="color:#ffb74d">The Adventurer</div>
+      <div class="card-role">Lahore · Ocean Crosser</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       3. MEME QUEEN
+  ══════════════════════════════════ -->
+  <div class="char-card" id="card-2" onclick="selectChar(2)" style="color:#ffd54f">
+    <div class="card-bar" style="background:linear-gradient(90deg,#b37b00,#ffd54f)"></div>
+
+    <!-- Portrait: hoodie, ponytail, phone, emoji speech bubbles, raised eyebrow -->
+    <div class="portrait-wrap">
+      <svg viewBox="0 0 100 100" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="50" fill="#9a6800"/>
+        <!-- floating chat bubbles -->
+        <rect x="60" y="10" width="30" height="18" rx="9" fill="white" opacity="0.92"/>
+        <text x="65" y="23" font-size="12">😂🔥</text>
+        <rect x="10" y="22" width="28" height="16" rx="8" fill="white" opacity="0.85"/>
+        <text x="15" y="34" font-size="11">💀</text>
+        <!-- hoodie shoulders -->
+        <path d="M6,100 Q16,62 50,56 Q84,62 94,100Z" fill="#e69100"/>
+        <!-- hoodie pocket line -->
+        <path d="M34,82 Q50,84 66,82" stroke="rgba(0,0,0,0.15)" stroke-width="2" fill="none"/>
+        <line x1="50" y1="82" x2="50" y2="92" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
+        <!-- hoodie drawstrings -->
+        <line x1="44" y1="62" x2="42" y2="72" stroke="#c87d00" stroke-width="2" stroke-linecap="round"/>
+        <line x1="56" y1="62" x2="58" y2="72" stroke="#c87d00" stroke-width="2" stroke-linecap="round"/>
+        <!-- neck -->
+        <rect x="43" y="52" width="14" height="10" rx="5" fill="#d4896a"/>
+        <!-- head -->
+        <circle cx="50" cy="42" r="22" fill="#d4896a"/>
+        <!-- ponytail -->
+        <path d="M70,36 Q84,28 82,46 Q80,58 70,52" stroke="#1a0a00" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <!-- hair top -->
+        <path d="M28,39 Q30,17 50,16 Q70,17 72,39 Q66,26 50,27 Q34,26 28,39Z" fill="#1a0a00"/>
+        <path d="M28,38 Q26,46 28,52" stroke="#1a0a00" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- eyes -->
+        <circle cx="41" cy="41" r="3.8" fill="white"/>
+        <circle cx="59" cy="41" r="3.8" fill="white"/>
+        <circle cx="41.8" cy="41.8" r="2.2" fill="#1a0a00"/>
+        <circle cx="59.8" cy="41.8" r="2.2" fill="#1a0a00"/>
+        <!-- raised right eyebrow (one up = unbothered) -->
+        <path d="M36,33 Q41,32 45,33.5" stroke="#1a0a00" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M55,32 Q60,30 64,32" stroke="#1a0a00" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- smirk (asymmetric) -->
+        <path d="M41,51 Q50,54 58,50" stroke="#a05020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- earring -->
+        <circle cx="27" cy="46" r="3" fill="#ffd700"/>
+        <!-- phone held up at side -->
+        <rect x="14" y="60" width="11" height="18" rx="3" fill="#1a1a1a" transform="rotate(-12,20,69)"/>
+        <rect x="15.5" y="62" width="8" height="12" rx="1.5" fill="#4fc3f7" transform="rotate(-12,20,69)"/>
+        <text x="10" y="95" font-size="9" fill="#ffd700" opacity="0.8">📱</text>
+      </svg>
+    </div>
+
+    <div class="sprite-wrap">
+      <svg viewBox="0 0 52 90" width="42" height="72" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <ellipse cx="26" cy="89" rx="15" ry="4" fill="rgba(255,213,79,0.2)"/>
+        <g id="c2-ll" style="transform-origin:19px 60px">
+          <line x1="19" y1="60" x2="14" y2="80" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+          <ellipse cx="11" cy="82" rx="7" ry="3" fill="#e53935"/>
+          <ellipse cx="11" cy="80" rx="7" ry="2.5" fill="white"/>
+        </g>
+        <g id="c2-lr" style="transform-origin:33px 60px">
+          <line x1="33" y1="60" x2="38" y2="80" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+          <ellipse cx="41" cy="82" rx="7" ry="3" fill="#e53935"/>
+          <ellipse cx="41" cy="80" rx="7" ry="2.5" fill="white"/>
+        </g>
+        <path d="M10,28 Q8,43 10,60 L42,60 Q44,43 42,28 Q37,23 26,23 Q15,23 10,28Z" fill="#f9a825"/>
+        <rect x="17" y="47" width="18" height="10" rx="4" fill="rgba(0,0,0,0.10)"/>
+        <line x1="26" y1="47" x2="26" y2="57" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+        <line x1="23" y1="30" x2="21" y2="37" stroke="#e69100" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="29" y1="30" x2="31" y2="37" stroke="#e69100" stroke-width="1.5" stroke-linecap="round"/>
+        <g id="c2-al" style="transform-origin:10px 33px">
+          <line x1="10" y1="33" x2="1" y2="53" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <g id="c2-ar" style="transform-origin:42px 33px">
+          <line x1="42" y1="33" x2="50" y2="16" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+          <rect x="44" y="3" width="9" height="14" rx="2" fill="#212121"/>
+          <rect x="45.5" y="5" width="6" height="9" rx="1" fill="#29b6f6"/>
+          <circle cx="48.5" cy="16.5" r="1.2" fill="#555"/>
+        </g>
+        <rect x="22" y="21" width="8" height="9" rx="3" fill="#f0a070"/>
+        <circle cx="26" cy="14" r="13" fill="#f0a070"/>
+        <path d="M38,8 Q48,4 46,18 Q44,25 38,22" stroke="#1a0a00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M13,11 Q14,0 26,1 Q38,0 39,11 Q34,5 26,6 Q18,5 13,11Z" fill="#1a0a00"/>
+        <path d="M13,10 Q12,16 14,21" stroke="#1a0a00" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="21" cy="13" r="2.5" fill="white"/>
+        <circle cx="31" cy="13" r="2.5" fill="white"/>
+        <circle cx="21.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <circle cx="31.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <path d="M28,9 Q31.5,7.5 34.5,9.5" stroke="#1a0a00" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M22,19 Q27,22 31,19" stroke="#b85c20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="13" cy="17" r="1.5" fill="#ffd700"/>
+      </svg>
+    </div>
+
+    <div class="card-footer">
+      <div class="card-name" style="color:#ffd54f">Meme Queen</div>
+      <div class="card-role">Viral · Unbothered</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       4. THE WIZARD
+  ══════════════════════════════════ -->
+  <div class="char-card" id="card-3" onclick="selectChar(3)" style="color:#ce93d8">
+    <div class="card-bar" style="background:linear-gradient(90deg,#3a1560,#9c27b0)"></div>
+
+    <!-- Portrait: WIZARD HAT, round HP glasses, robe, wand, stars -->
+    <div class="portrait-wrap">
+      <svg viewBox="0 0 100 100" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="50" fill="#2a0e50"/>
+        <!-- background stars -->
+        <text x="8"  y="22" font-size="11" fill="#ffd700" opacity="0.75">✦</text>
+        <text x="78" y="18" font-size="9"  fill="#ce93d8" opacity="0.8">✦</text>
+        <text x="82" y="58" font-size="7"  fill="#ffd700" opacity="0.6">·</text>
+        <text x="12" y="64" font-size="8"  fill="#ce93d8" opacity="0.55">✦</text>
+        <text x="60" y="88" font-size="7"  fill="#ffd700" opacity="0.5">✦</text>
+        <!-- robe shoulders -->
+        <path d="M4,100 Q14,64 50,58 Q86,64 96,100Z" fill="#1e0840"/>
+        <!-- robe gold trim -->
+        <path d="M14,70 Q32,66 50,65 Q68,66 86,70" stroke="#ffd700" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- robe star pattern -->
+        <text x="20" y="86" font-size="8" fill="#ffd700" opacity="0.4">✦</text>
+        <text x="62" y="84" font-size="7" fill="#ce93d8" opacity="0.4">✦</text>
+        <!-- WIZARD HAT — the key element -->
+        <!-- hat brim shadow -->
+        <ellipse cx="50" cy="30" rx="28" ry="8" fill="#0d0520"/>
+        <!-- hat cone -->
+        <path d="M26,30 Q34,6 50,0 Q66,6 74,30Z" fill="#1a0840"/>
+        <!-- hat star decoration -->
+        <text x="43" y="22" font-size="14" fill="#ffd700" opacity="0.9">✦</text>
+        <!-- hat band -->
+        <path d="M26,30 Q50,38 74,30" stroke="#ffd700" stroke-width="2.2" fill="none" opacity="0.8"/>
+        <!-- neck -->
+        <rect x="43" y="55" width="14" height="10" rx="5" fill="#d4896a"/>
+        <!-- head -->
+        <circle cx="50" cy="46" r="20" fill="#d4896a"/>
+        <!-- hair sides peeking under hat -->
+        <path d="M30,44 Q28,52 30,60" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M70,44 Q72,52 70,60" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- ROUND HP-style glasses -->
+        <circle cx="42" cy="47" r="7" fill="rgba(255,255,255,0.06)" stroke="#2a1800" stroke-width="2.2"/>
+        <circle cx="58" cy="47" r="7" fill="rgba(255,255,255,0.06)" stroke="#2a1800" stroke-width="2.2"/>
+        <line x1="49" y1="47" x2="51" y2="47" stroke="#2a1800" stroke-width="1.5"/>
+        <line x1="28" y1="47" x2="35" y2="47" stroke="#2a1800" stroke-width="1.5"/>
+        <line x1="65" y1="47" x2="72" y2="47" stroke="#2a1800" stroke-width="1.5"/>
+        <!-- eyes -->
+        <circle cx="42" cy="47.5" r="2.4" fill="#1a0a00"/>
+        <circle cx="58" cy="47.5" r="2.4" fill="#1a0a00"/>
+        <!-- smile -->
+        <path d="M41,56 Q50,62 59,56" stroke="#a05020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- earring -->
+        <circle cx="30" cy="50" r="2.5" fill="#ffd700"/>
+        <!-- wand with glowing tip -->
+        <line x1="72" y1="70" x2="90" y2="46" stroke="#4a3000" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="90" cy="45" r="6"   fill="#ffd700" opacity="0.9"/>
+        <circle cx="90" cy="45" r="10"  fill="#ffd700" opacity="0.2"/>
+        <circle cx="90" cy="45" r="14"  fill="#ffd700" opacity="0.08"/>
+        <text x="83" y="38" font-size="10" fill="#ffd700">✦</text>
+      </svg>
+    </div>
+
+    <div class="sprite-wrap">
+      <svg viewBox="0 0 52 90" width="42" height="72" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <ellipse cx="26" cy="89" rx="15" ry="4" fill="rgba(206,147,216,0.2)"/>
+        <text x="1"  y="14" font-size="8" fill="#ffd700" opacity="0.7">✦</text>
+        <text x="42" y="20" font-size="6" fill="#ce93d8" opacity="0.7">✦</text>
+        <g id="c3-ll" style="transform-origin:19px 60px">
+          <line x1="19" y1="60" x2="14" y2="82" stroke="#311b4c" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="12" cy="83" rx="5.5" ry="2.5" fill="#1a0a30" transform="rotate(-8,12,83)"/>
+        </g>
+        <g id="c3-lr" style="transform-origin:33px 60px">
+          <line x1="33" y1="60" x2="38" y2="82" stroke="#311b4c" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="40" cy="83" rx="5.5" ry="2.5" fill="#1a0a30" transform="rotate(8,40,83)"/>
+        </g>
+        <path d="M8,26 Q4,41 6,62 L46,62 Q48,41 44,26 Q38,21 26,21 Q14,21 8,26Z" fill="#311b4c"/>
+        <path d="M8,26 Q4,41 6,62" stroke="#ffd700" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <path d="M44,26 Q48,41 46,62" stroke="#ffd700" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <path d="M21,35 L26,31 L31,35 L29,43 L23,43Z" fill="none" stroke="#ffd700" stroke-width="0.8" opacity="0.55"/>
+        <g id="c3-al" style="transform-origin:8px 30px">
+          <line x1="8" y1="30" x2="-1" y2="50" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+        </g>
+        <g id="c3-ar" style="transform-origin:44px 30px">
+          <line x1="44" y1="30" x2="52" y2="50" stroke="#f0a070" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="50" y1="36" x2="60" y2="18" stroke="#5d4037" stroke-width="2.8" stroke-linecap="round"/>
+          <circle cx="60" cy="18" r="3.5" fill="#ffd700" opacity="0.85"/>
+          <circle cx="60" cy="18" r="6"   fill="#ffd700" opacity="0.18"/>
+        </g>
+        <rect x="22" y="20" width="8" height="8" rx="3" fill="#f0a070"/>
+        <circle cx="26" cy="13" r="13" fill="#f0a070"/>
+        <path d="M13,10 Q11,25 13,36" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M39,10 Q41,25 39,36" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M13,10 Q14,-1 26,0 Q38,-1 39,10 Q34,4 26,5 Q18,4 13,10Z" fill="#1a0a00"/>
+        <!-- wizard hat on sprite -->
+        <path d="M16,10 Q20,1 26,0 Q32,1 36,10Z" fill="#1a0840"/>
+        <path d="M14,11 Q26,14 38,11" stroke="#ffd700" stroke-width="0.8" fill="none" opacity="0.7"/>
+        <circle cx="20.5" cy="13" r="3.8" fill="none" stroke="#3a2800" stroke-width="1.6"/>
+        <circle cx="31.5" cy="13" r="3.8" fill="none" stroke="#3a2800" stroke-width="1.6"/>
+        <line x1="24.3" y1="13" x2="27.7" y2="13" stroke="#3a2800" stroke-width="1"/>
+        <line x1="12"   y1="13" x2="16.7" y2="13" stroke="#3a2800" stroke-width="1"/>
+        <line x1="35.3" y1="13" x2="39"   y2="13" stroke="#3a2800" stroke-width="1"/>
+        <circle cx="20.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <circle cx="31.5" cy="13.5" r="1.4" fill="#1a0a00"/>
+        <path d="M21,19 Q26,23 31,19" stroke="#b85c20" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <circle cx="13" cy="17" r="1.5" fill="#ffd700"/>
+      </svg>
+    </div>
+
+    <div class="card-footer">
+      <div class="card-name" style="color:#ce93d8">The Wizard</div>
+      <div class="card-role">Hogwarts, but make it Brown</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Start Button ── -->
+<div id="start-zone">
+  <button id="start-btn" onclick="beginJourney()">▶ &nbsp; Begin Your Journey</button>
+  <div id="start-tagline"></div>
+</div>
+
+<!-- ── Stats ── -->
+<div id="stats-panel">
+  <div class="stats-box" id="stats-0"
+       style="background:linear-gradient(135deg,rgba(123,26,26,0.35),rgba(10,10,28,0.88));border:1px solid rgba(255,107,107,0.18)">
+    <div class="stats">
+      <div class="stat-row"><span class="stat-label">Research</span><div class="stat-bar-bg"><div class="stat-bar" id="b0-0" style="background:#ff6b6b"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Empathy</span> <div class="stat-bar-bg"><div class="stat-bar" id="b0-1" style="background:#ff8a80"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Chaos</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b0-2" style="background:#ff6b6b"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Magic</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b0-3" style="background:#ff6b6b"></div></div></div>
+    </div>
+  </div>
+  <div class="stats-box" id="stats-1"
+       style="background:linear-gradient(135deg,rgba(192,98,42,0.35),rgba(10,10,28,0.88));border:1px solid rgba(255,183,77,0.18)">
+    <div class="stats">
+      <div class="stat-row"><span class="stat-label">Boldness</span><div class="stat-bar-bg"><div class="stat-bar" id="b1-0" style="background:#ffb74d"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Roots</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b1-1" style="background:#ffa726"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Chaos</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b1-2" style="background:#ffb74d"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Magic</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b1-3" style="background:#ffb74d"></div></div></div>
+    </div>
+  </div>
+  <div class="stats-box" id="stats-2"
+       style="background:linear-gradient(135deg,rgba(154,104,0,0.35),rgba(10,10,28,0.88));border:1px solid rgba(255,213,79,0.18)">
+    <div class="stats">
+      <div class="stat-row"><span class="stat-label">Vibes</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b2-0" style="background:#ffd54f"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Clout</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b2-1" style="background:#ffc107"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Chaos</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b2-2" style="background:#ffd54f"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Magic</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b2-3" style="background:#ffd54f"></div></div></div>
+    </div>
+  </div>
+  <div class="stats-box" id="stats-3"
+       style="background:linear-gradient(135deg,rgba(58,21,96,0.42),rgba(10,10,28,0.88));border:1px solid rgba(206,147,216,0.18)">
+    <div class="stats">
+      <div class="stat-row"><span class="stat-label">Wisdom</span>  <div class="stat-bar-bg"><div class="stat-bar" id="b3-0" style="background:#ce93d8"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Nerd Cred</span><div class="stat-bar-bg"><div class="stat-bar" id="b3-1" style="background:#ba68c8"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Chaos</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b3-2" style="background:#ce93d8"></div></div></div>
+      <div class="stat-row"><span class="stat-label">Magic</span>   <div class="stat-bar-bg"><div class="stat-bar" id="b3-3" style="background:#ce93d8"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-pad"></div>
+
+<script>
+const DATA = [
+  { color:'#ff6b6b', glow:'rgba(255,107,107,0.45)', btnBg:'linear-gradient(135deg,#e53935,#ff8a80)',
+    tagline:'"Research is useless if it doesn\'t reach the people who need it."',
+    stats:[95,92,28,58] },
+  { color:'#ffb74d', glow:'rgba(255,183,77,0.45)',  btnBg:'linear-gradient(135deg,#e07b39,#ffd180)',
+    tagline:'"Lahore to Providence. 7,300 miles. One carry-on."',
+    stats:[98,100,55,72] },
+  { color:'#ffd54f', glow:'rgba(255,213,79,0.45)',  btnBg:'linear-gradient(135deg,#f9a825,#fff176)',
+    tagline:'"Don\'t work too hard. The internet agreed."',
+    stats:[100,94,85,46] },
+  { color:'#ce93d8', glow:'rgba(206,147,216,0.45)', btnBg:'linear-gradient(135deg,#7b1fa2,#e040fb)',
+    tagline:'"Turns out CS was just magic she hadn\'t learned yet. Hogwarts, but Brown."',
+    stats:[92,100,60,100] },
+];
+
+let selected = -1;
+const btn      = document.getElementById('start-btn');
+const taglineEl= document.getElementById('start-tagline');
+
+function selectChar(i) {
+  const prev = selected;
+  if (prev !== -1) {
+    document.getElementById(`card-${prev}`).classList.remove('selected');
+    document.getElementById(`card-${prev}`).style.boxShadow  = '';
+    document.getElementById(`card-${prev}`).style.borderColor= 'rgba(255,255,255,0.07)';
+    document.getElementById(`stats-${prev}`).classList.remove('show');
+    for (let j=0;j<4;j++) { const b=document.getElementById(`b${prev}-${j}`); if(b) b.style.width='0'; }
+  }
+  if (prev === i) {
+    selected = -1;
+    btn.style.display = 'none';
+    taglineEl.style.display = 'none';
+    return;
+  }
+  selected = i;
+  const d    = DATA[i];
+  const card = document.getElementById(`card-${i}`);
+  card.classList.add('selected');
+  card.style.boxShadow   = `0 0 0 2px ${d.color}, 0 0 40px ${d.glow}, 0 16px 60px rgba(0,0,0,0.5)`;
+  card.style.borderColor = d.color;
+
+  const box = document.getElementById(`stats-${i}`);
+  box.classList.add('show');
+  setTimeout(() => {
+    d.stats.forEach((v,j) => { const b=document.getElementById(`b${i}-${j}`); if(b) b.style.width=`${v}%`; });
+  }, 80);
+
+  // Re-trigger button animation each time
+  btn.style.display = 'none';
+  void btn.offsetWidth;
+  btn.style.cssText = `
+    display:inline-block;
+    background:${d.btnBg};
+    box-shadow:0 0 32px ${d.glow}, 0 8px 32px rgba(0,0,0,0.4);
+    padding:18px 64px; border:none; border-radius:60px;
+    font-size:14px; font-weight:900; letter-spacing:5px; text-transform:uppercase;
+    cursor:pointer; font-family:inherit; color:#07071a;
+    animation:btnPop .45s cubic-bezier(.34,1.5,.64,1) forwards;
+  `;
+
+  taglineEl.style.display  = 'block';
+  taglineEl.style.opacity  = '0';
+  taglineEl.style.animation= 'none';
+  taglineEl.textContent    = d.tagline;
+  void taglineEl.offsetWidth;
+  taglineEl.style.animation= 'fadeIn .5s .15s ease forwards';
+
+  box.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function beginJourney() {
+  if (selected === -1) return;
+  localStorage.setItem('selectedCharacter', selected);
+  btn.innerHTML = '✓ &nbsp; Loading Journey...';
+  setTimeout(() => { window.location.href = 'my_journey.html'; }, 800);
+}
+
+// Walk animation
+const chars = [
+  { ll:'c0-ll', lr:'c0-lr', al:'c0-al', ar:'c0-ar', phase:0   },
+  { ll:'c1-ll', lr:'c1-lr', al:'c1-al', ar:'c1-ar', phase:1.6 },
+  { ll:'c2-ll', lr:'c2-lr', al:'c2-al', ar:'c2-ar', phase:3.1 },
+  { ll:'c3-ll', lr:'c3-lr', al:'c3-al', ar:'c3-ar', phase:0.8 },
+];
+let tick = 0;
+(function animate() {
+  tick += 0.1;
+  chars.forEach(c => {
+    const a = Math.sin(tick + c.phase) * 22;
+    ['ll','lr','al','ar'].forEach((k,idx) => {
+      const el = document.getElementById(c[k]);
+      if (!el) return;
+      const deg = idx===0?a : idx===1?-a : idx===2?-a*0.5 : a*0.5;
+      el.style.transform = `rotate(${deg}deg)`;
+    });
+  });
+  requestAnimationFrame(animate);
+})();
+</script>
+</body>
+</html>
