@@ -679,7 +679,7 @@ function buildWorld() {
   }
 
   // ── Mountain for Brown University ─────────────────────────────
-  const brownPeakIdx = MILESTONES.findIndex(m => m.stamp && m.stamp.includes('Never Will I Ever #2'));
+  const brownPeakIdx = MILESTONES.findIndex(m => (m.yOffset || 0) >= 130);
   if (brownPeakIdx !== -1) {
     const mx  = xPositions[brownPeakIdx];
     const ph  = 200;   // peak height above groundY
