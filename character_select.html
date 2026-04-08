@@ -39,17 +39,7 @@ body::after {
 
 /* ── Header ── */
 .header { text-align:center; padding:48px 20px 16px; }
-.header-label {
-  font-size: clamp(24px, 4.5vw, 48px);
-  font-weight: 700;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: #ffffff;
-  -webkit-text-fill-color: #ffffff;
-  margin-bottom: 8px;
-  line-height: 1.1;
-  opacity: 0.92;
-}
+.header-label { font-size:11px; letter-spacing:8px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:14px; }
 .header h1 {
   font-size:clamp(20px,5vw,52px); font-weight:900; letter-spacing:12px; text-transform:uppercase;
   background:linear-gradient(90deg,#ffd700 0%,#fff 45%,#ffd700 100%);
@@ -87,7 +77,7 @@ body::after {
 
 .card-footer { width:100%; padding:10px 14px 18px; text-align:center; }
 .card-name { font-size:12px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:5px; }
-.card-role { font-size:11px; color:rgba(255,255,255,0.88); letter-spacing:1.2px; line-height:1.6; }
+.card-role { font-size:10px; color:rgba(255,255,255,0.65); letter-spacing:1.2px; line-height:1.6; }
 
 .char-card::before, .char-card::after {
   content:''; position:absolute; width:18px; height:18px; opacity:0; transition:opacity .25s;
@@ -112,9 +102,9 @@ body::after {
   to   { opacity:1; transform:scale(1)   translateY(0); }
 }
 #start-tagline {
-  display:none; font-size:clamp(16px, 2.2vw, 22px); color:rgba(255,255,255,0.9);
-  letter-spacing:.3px; font-style:italic; text-align:center;
-  max-width:560px; line-height:1.85; font-weight:400;
+  display:none; font-size:14px; color:rgba(255,255,255,0.55);
+  letter-spacing:.5px; font-style:italic; text-align:center;
+  max-width:440px; line-height:1.8;
   animation:fadeIn .5s .15s ease forwards; opacity:0;
 }
 @keyframes fadeIn { to { opacity:1; } }
@@ -139,6 +129,7 @@ body::after {
 <div class="page">
 
 <div class="header">
+  <div class="header-label">Zainab Iftikhar</div>
   <h1>Choose Your Character</h1>
   <div class="header-sub">Four sides of the same person</div>
   <div class="divider"></div>
@@ -547,7 +538,7 @@ body::after {
 
 <!-- ── Start Button ── -->
 <div id="start-zone">
-  <button id="start-btn">▶ &nbsp; Begin Your Journey</button>
+  <button id="start-btn" onclick="beginJourney()">▶ &nbsp; Begin Your Journey</button>
   <div id="start-tagline"></div>
 </div>
 
@@ -664,16 +655,12 @@ function selectChar(i) {
   box.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
-let journeyStarted = false;
 function beginJourney() {
-  if (selected === -1 || journeyStarted) return;
-  journeyStarted = true;
+  if (selected === -1) return;
   localStorage.setItem('selectedCharacter', selected);
-  btn.disabled = true;
   btn.innerHTML = '✓ &nbsp; Loading Journey...';
   setTimeout(() => { window.location.href = 'my_journey.html'; }, 800);
 }
-btn.addEventListener('click', beginJourney);
 
 // Walk animation
 const chars = [
