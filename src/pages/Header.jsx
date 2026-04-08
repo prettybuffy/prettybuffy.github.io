@@ -24,6 +24,7 @@ export default function Header() {
             <Link to="/" className="pr-4 py-3 hover:text-highlight transition-colors">Home</Link>
             <Link to="/papers" className="px-4 py-3 hover:text-highlight transition-colors">Papers</Link>
             <Link to="/projects" className="px-4 py-3 hover:text-highlight transition-colors">Projects</Link>
+             {/*<a href="/about-me/" className="px-4 py-3 hover:text-highlight transition-colors">About Me</a>*/} 
             {/*<Link to="/teaching" className="px-4 py-3 hover:text-highlight transition-colors">Teaching</Link>*/}
           </div>
         </div>
