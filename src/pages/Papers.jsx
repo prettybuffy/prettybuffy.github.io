@@ -2,6 +2,14 @@ import React from 'react';
 import pdfLogo from '/img/pdf_icon.svg'
 
 const papers = [
+  {
+    title: "Therapy as an NLP Task: Comparing LLMs and Human Peers Behaviors in CBT Sessions",
+    authors: "Zainab Iftikhar, Sean Ransom, Amy Xiao, Nicole Nugent, Jeff Huang",
+    venue: "CSCW 2026",
+    website: "https://cheeseburgertherapy.org",
+    pdf: "/papers/SimulatedLLMTherapy_CSCW26.pdf",
+    doi: "https://dl.acm.org/doi/full/10.1145/3817112"
+  },
  {
     title: "How LLM Counselors Violate Ethical Standards in Mental Health Practice: A Practitioner-Informed Framework",
     authors: "Zainab Iftikhar, Amy Xiao, Sean Ransom, Jeff Huang, Harini Suresh",
@@ -9,14 +17,6 @@ const papers = [
     /*award: "(Best Paper Award)",*/
     pdf: "/papers/EthicalFramework_AAAI25.pdf",
     doi: "https://ojs.aaai.org/index.php/AIES/article/view/36632"
-  },
-  {
-    title: "Therapy as an NLP Task: Psychologists' Comparison of LLMs and Human Peers in CBT",
-    authors: "Zainab Iftikhar, Sean Ransom, Amy Xiao, Nicole Nugent, Jeff Huang",
-    venue: "preprint 2025",
-    website: "https://cheeseburgertherapy.org",
-    pdf: "/papers/LLM_Therapy.pdf",
-    doi: "https://arxiv.org/abs/2409.02244"
   },
  {
     title: "Tone Indicators: Designing Accessible CMC Cues for Neurodiverse Users",
